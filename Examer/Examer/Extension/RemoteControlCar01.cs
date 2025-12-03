@@ -7,7 +7,7 @@ public class RemoteControlCar01
     public int BatteryDrain { get; set; } // 電量消耗
     public int DistanceDrivenValue { get; set; } // 行駛距離
 
-    public RemoteControlCar(int speed, int batteryDrain)
+    public RemoteControlCar01(int speed, int batteryDrain)
     {
         this.Speed = speed;
         this.Battery = 100;
