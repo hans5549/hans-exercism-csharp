@@ -2,59 +2,72 @@ namespace Examer.Extension;
 
 public abstract class Character
 {
+    private readonly string _characterType;
+
     protected Character(string characterType)
     {
-        throw new NotImplementedException("Please implement the Character() constructor");
+        _characterType = characterType;
     }
 
     public abstract int DamagePoints(Character target);
 
     public virtual bool Vulnerable()
     {
-        throw new NotImplementedException("Please implement the Character.Vulnerable() method");
+        return false;
     }
 
     public override string ToString()
     {
-        throw new NotImplementedException("Please implement the Character.ToString() method");
+        return $"Character is a {_characterType}";
     }
 }
 
 public class Warrior : Character
 {
-    public Warrior() : base("TODO")
+    public Warrior() : base("Warrior")
     {
-    }
-
-    public override string ToString()
-    {
-        return "Character is a Warrior";
     }
 
     public override int DamagePoints(Character target)
     {
-        throw new NotImplementedException("Please implement the Warrior.DamagePoints() method");
+        if (target.Vulnerable())
+        {
+            return 10;
+        }
+        else
+        {
+            return 6;
+        }
     }
 }
 
 public class Wizard : Character
 {
-    public Wizard() : base("TODO")
+    public bool IsSpellPrepared { get; set; } = false;
+
+    public Wizard() : base("Wizard")
     {
     }
-    
-    public override string ToString()
+
+    public override bool Vulnerable()
     {
-        return "Character is a Wizard";
+        return !IsSpellPrepared;
     }
 
     public override int DamagePoints(Character target)
     {
-        throw new NotImplementedException("Please implement the Wizard.DamagePoints() method");
+        if (IsSpellPrepared)
+        {
+            return 12;
+        }
+        else
+        {
+            return 3;
+        }
     }
 
     public void PrepareSpell()
     {
-        throw new NotImplementedException("Please implement the Wizard.PrepareSpell() method");
+        IsSpellPrepared = true;
     }
 }
